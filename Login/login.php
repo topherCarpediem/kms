@@ -1,9 +1,14 @@
 <?php 
 include('../classes/dbHelper.php');
-include('../classes/tokenHelper.php');
+include('../classes/loginHelper.php');
 
-	$username = array(':username'=>'username');
-	$password = 'password';
+	if(Login::isLoggedIn()){
+		header('location: ../admin/index.html');
+	}
+
+	$errors = array();
+	$username = array(':username'=>$_POST['username']);
+	$password = $_POST['password'];
 
 	if(DB::query('SELECT username FROM users WHERE username=:username', $username)){
 		if(password_verify($password, DB::query('SELECT password FROM users WHERE username=:username', $username)[0]['password'])){
@@ -15,7 +20,14 @@ include('../classes/tokenHelper.php');
 
 			setcookie("KMSID", $token, time() + 60 * 60 * 24 * 7, '/', NULL, NULL, TRUE);
 			setcookie("KMSID_*", 'hdhoi5sd45', time() + 60 * 60 * 24 * 3, '/', NULL, NULL, TRUE);
+
+			header('location: ../admin/index.html');
+
+		}else{
+			array_push($errors, 'Invalid password');
 		}	
+	}else{
+		array_push($errors, 'Invalid username');
 	}
 
 
@@ -163,16 +175,19 @@ footer{
 	</div>
 	
 	<form method="post" action="login.php" class="form_dsgn">
-
-
-
+		<?php  if (count($errors) > 0) : ?>
+			<div class="error">
+				<?php foreach ($errors as $error) : ?>
+					<p><?php echo $error ?></p>
+				<?php endforeach ?>
+			</div>
+		<?php  endif ?>
 		<div class="input-group">
 			
-			<input type="text" name="username" placeholder="Username " >
+			<input type="text" name="username" placeholder="Username" required >
 		</div>
 		<div class="input-group">
-			
-			<input type="password" name="password" placeholder="Password ">
+			<input type="password" name="password" placeholder="Password" required>
 		</div>
 		<div class="input-group">
 			<button type="submit" class="btn" name="login_user">Login</button>

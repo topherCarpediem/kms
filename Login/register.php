@@ -64,12 +64,14 @@ if ($password_1 == $password_2) {
 
 <form method="post" action="register.php">
 <?php  if (count($errors) > 0) : ?>
+
 		<div class="error">
 			<?php foreach ($errors as $error) : ?>
 				<p><?php echo $error ?></p>
 			<?php endforeach ?>
 		</div>
 		<?php  endif ?>
+
 		<div class="input-group">
 			<label>First Name</label>
 			<input type="text" id="firstname" name="firstname" placeholder="Enter firstname" required>
