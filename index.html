@@ -1,0 +1,105 @@
+<?php 
+	session_start(); 
+
+	if (!isset($_SESSION['username'])) {
+		$_SESSION['msg'] = "You must log in first";
+		header('location: login.php');
+	}
+
+	if (isset($_GET['logout'])) {
+		session_destroy();
+		unset($_SESSION['username']);
+		header("location: login.php");
+	}
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="description" content="Knowledge Management Site of Gender and Development Office">
+	<meta name="keywords" content="KMS of GAD, GAD KMS, BSU KMS">
+
+	<title>GAD MAIN PAGE</title>
+	<!-- Bootstrap Code ito para sa designs
+	  <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+     <script src="js/bootstrap.min.js"></script> -->
+	<link rel="stylesheet" href="./Css/Main.css"  />
+    
+
+</head>
+
+<body>
+			<!--Design for Categories-->
+	<header>
+		<div class="container"> 
+			<div id="GADname">
+				<h1><span class="highlight">Gender and Development</span> </h1>
+			</div>
+				<nav>
+					<ul>
+					<li class="current"> <a href="index.html">HOME</a></li>
+					<li> <a href="Categories/About.html">About</a></li>
+					<li> <a href="Categories/GADMandates.html">GAD Mandates</a></li>
+					<li> <a href="Categories/Linkages.html">Linkages</a></li>
+					<li> <a href="Categories/PPA.html">PPA</a></li>
+					<li> <a href="Categories/Resources.html">Resources</a></li>
+					<li> <a href="Categories/Site.html">Connected Sites</li>
+					<li> <a href="Login/login.php">LOGIN</a></li>
+					</ul>
+				</nav>
+		</div>
+	</header>
+<!-- First Section for Site Name -->
+
+<section id="showcase">
+	<div class="container">
+		<h1>Knowledge Management System</h1>
+		<p>To formulate and implement an effective mechanism for planning, policy-making, financing, management, monitoring and assessment of the Extension Service of the University</p>	
+	</div>
+</section>
+
+<!-- Search Button-->
+<section id="newsletter">
+	<div class="container">
+		<h1>Subscribe to our Site</h1>
+			<form>
+				<input type="email" placeholder="Search">
+			<button type="submit" class="button_1">Search</button>
+			</form>
+	</div>
+</section>
+
+
+<!-- Section para sa Activities Part-->
+
+<section id="boxes">
+	<div class="container">
+		<div class="box">
+			<img src="./img/logo_bsu.jpg">
+			<h3> <a href = "Categories/PPA.html"> Programs, Project and Ativities </a> </h3>
+			<p>To formulate and implement an effective mechanism for planning, policy-making, financing, management, monitoring and assessment of the Extension Service of the University</p>
+		</div>
+		<div class="box">
+			<img src="./img/logo_bsu.jpg">
+			<h3> <a href = "Categories/Linkages.html">Linkages </a> </h3>
+			<p>To formulate and implement an effective mechanism for planning, policy-making, financing, management, monitoring and assessment of the Extension Service of the University</p>
+		</div>
+		<div class="box">
+			<img src="./img/logo_bsu.jpg">
+			<h3> <a href = "Categories/OfficePub.html"> Office Publication </a> </h3>
+			<p>To formulate and implement an effective mechanism for planning, policy-making, financing, management, monitoring and assessment of the Extension Service of the University</p>
+		</div>
+	</div>
+</section>
+
+<footer>
+	<p>Gender And Development, Copyright &copy; 2017</p>
+
+</footer>
+
+
+</body>
+</html>	
