@@ -9,9 +9,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 			$matches = array();
 			foreach($data as $k=>$v) {
 			   if(strpos($v[$k], $keyword)){
-			   	
+			   		print_r('header(string)');
 			   }
 			}
+
+			print_r($matches);
 		}
 	}
 }
