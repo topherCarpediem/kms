@@ -2,11 +2,13 @@
 include('../classes/dbHelper.php');
 include('../classes/loginHelper.php');
 
+$errors = array();
 	if(Login::isLoggedIn()){
 		header('location: index.php');
 	}
 
-	$errors = array();
+	if(isset($_POST['login_user'])){
+	
 	$username = array(':username'=>$_POST['username']);
 	$password = $_POST['password'];
 
@@ -29,7 +31,7 @@ include('../classes/loginHelper.php');
 	}else{
 		array_push($errors, 'Invalid username');
 	}
-
+}
 
 
 ?>
@@ -170,8 +172,8 @@ footer{
 	</header>
 
 	<div class="trans">
-	<div class="header">
-		<h2>Login</h2>
+	<div class="header" style="margin-top: 50px">
+		
 	</div>
 	
 	<form method="post" action="login.php" class="form_dsgn">

@@ -3,7 +3,7 @@
 class DB {
 
     private static function connect(){
-        $dsn = 'mysql:dbname=kns;host=127.0.0.1';
+        $dsn = 'mysql:dbname=kms;host=127.0.0.1';
         $user = 'root';
         $password = '';
         
