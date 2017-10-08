@@ -15,9 +15,20 @@ if (isset($_POST['reg_user'])) {
   $email = $_POST['email'];
   $password_1 = $_POST['password_1'];
   $password_2 = $_POST['password_2'];
-
-  $params = array(':firstname'=>$firstname, ':lastname'=> $lastname, ':username'=>$username, ':email'=>$email, ':password'=> $password_1);
+if ($password_1 == $password_2) {
+  if(!DB::query('SELECT username FROM users WHERE username=:username', array(':username'=>$username))){
+    if(!DB::query('SELECT email FROM users WHERE email=:email', array(':email'=>$email))){
+  $params = array(':firstname'=>$firstname, ':lastname'=> $lastname, ':username'=>$username, ':email'=>$email, ':password'=>password_hash($password_1, PASSWORD_BCRYPT));
   DB::query('INSERT INTO users VALUES(\'\', :firstname, :lastname, :username, :email, :password)', $params);
+  }else{
+      array_push($errors ,'Email is used on existing username');
+    }
+  }else{
+    array_push($errors ,'Username exist');
+  }
+}else{
+  array_push($errors ,'password didnt match');
+}
 }
 
 
@@ -65,7 +76,7 @@ if (isset($_POST['reg_user'])) {
     <form action="register.php" method="post">
       <?php  if (count($errors) > 0) : ?>
 
-    <div class="error">
+    <div class="alert alent-danger">
       <?php foreach ($errors as $error) : ?>
         <p><?php echo $error ?></p>
       <?php endforeach ?>
