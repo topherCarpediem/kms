@@ -20,6 +20,7 @@ if ($password_1 == $password_2) {
     if(!DB::query('SELECT email FROM users WHERE email=:email', array(':email'=>$email))){
   $params = array(':firstname'=>$firstname, ':lastname'=> $lastname, ':username'=>$username, ':email'=>$email, ':password'=>password_hash($password_1, PASSWORD_BCRYPT));
   DB::query('INSERT INTO users VALUES(\'\', :firstname, :lastname, :username, :email, :password)', $params);
+        array_push($errors, 'Account created with 0 error. Thank you');
   }else{
       array_push($errors ,'Email is used on existing username');
     }
