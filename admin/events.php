@@ -98,6 +98,7 @@ if(isset($_POST['submit-form'])){
               <li class="user-footer">
               <form method="post" action="../Login/logout.php">
                   <div class="pull-right">
+  <a href="register.php" class="btn btn-primary">Add User</a>
                     <button type="submit" class="btn btn-default btn-flat" name="logout">Sign out</button>
                   </div>
                 </form>
@@ -304,11 +305,13 @@ if(isset($_POST['submit-form'])){
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
   <footer class="main-footer">
-   
-    <strong>Copyright &copy; 2017 KMS</strong> All rights
-    reserved.
+    <div class="container" style="text-align: center;">
+      
+      <strong>Copyright & KMS 2017.</strong> All rights
+      reserved.
+    </div>
+    <!-- /.container -->
   </footer>
 
     </div>

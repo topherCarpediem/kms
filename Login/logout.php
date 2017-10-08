@@ -2,7 +2,7 @@
 include '../classes/dbHelper.php';
 include '../classes/loginHelper.php';
 if(!Login::isLoggedIn()){
-    header('location: ../index.html');
+    header('location: ../home/index.php');
 }
 
 if(isset($_POST['logout'])){
@@ -12,7 +12,7 @@ if(isset($_POST['logout'])){
     }
     setcookie('KMSID', '1', time()-3600);
     setcookie('KMSID_*', '1', time()-3600);
-    header('location: ../index.html');
+    header('location: ../home/index.php');
 }
 
 

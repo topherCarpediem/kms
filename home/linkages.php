@@ -8,7 +8,7 @@ include '../classes/dbHelper.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GAD Mandatez</title> 
+  <title>Linkages</title> 
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -58,8 +58,8 @@ include '../classes/dbHelper.php';
             
             <li><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
             <li><a href="about.php">About</a></li>
-            <li  class="active"><a href="mandates.php">GAD Mandates</a></li>
-            <li><a href="linkages.php">Linkages</a></li>
+            <li><a href="mandates.php">GAD Mandates</a></li>
+            <li class="active"><a href="linkages.php">Linkages</a></li>
             <li><a href="ppa.php">PPA</a></li>
             <li><a href="resources.php">Resources</a></li>
             <li><a href="connected_sites.php">Connected Sites</a></li>
@@ -86,18 +86,18 @@ include '../classes/dbHelper.php';
       <!-- Main content -->
       <section class="content">
        
-        <?php $mandates = DB::query('SELECT * FROM gad WHERE isPublished=true'); ?>
-        <?php foreach ($mandates as $value) { ?>
+        <?php $linkages = DB::query('SELECT * FROM linkages WHERE isPublished=true'); ?>
+        <?php foreach ($linkages as $value) { ?>
         <div class="col-md-4">
           <div class="box box-primary">
             <div class="box-header">
               <h4 class="box-title"><?= $value['title'] ?></h4><br>
-              <small><?= $value['author'] ?></small>
+              <small></small>
             </div>
             <div class="box-body">
                 <div class="form-group">
                     <label for="summary">Summary</label>
-                    <textarea  readonly type="text" class="form-control" name="summary" id="summary" style="resize: vertical; max-height: 300px; min-height: 200px;"><?= $value['summary'] ?></textarea> 
+                    <textarea  readonly type="text" class="form-control" name="summary" id="summary" style="resize: vertical; max-height: 300px; min-height: 200px;"><?= $value['description'] ?></textarea> 
                    <!--  <button class="btn btn-primary btn-block" >View</button> -->
                 </div>
             <small style="float: right;">ask for the admin staff for full copy</small>
@@ -161,7 +161,7 @@ function get_mandates_data(keyword){
          if (json.length > 0) {
             $(".content").html('')
            json.forEach(item=>{
-            $(".content").append("<div class=\"col-md-4\"><div class=\"box box-primary\"><div class=\"box-header\"><h4 class=\"box-title\">" + item.title + "</h4><br><small>" + item.author + "</small></div><div class=\"box-body\"><div class=\"form-group\"><label for=\"summary\">Summary</label><textarea  readonly type=\"text\" class=\"form-control\" name=\"summary\" id=\"summary\" style=\"resize: vertical; max-height: 300px; min-height: 200px;\">" + item.summary + "</textarea></div><small style=\"float: right;\">ask for the admin staff for full copy</small></div></div></div>") 
+            $(".content").append("<div class=\"col-md-4\"><div class=\"box box-primary\"><div class=\"box-header\"><h4 class=\"box-title\">" + item.title + "</h4><br><small></small></div><div class=\"box-body\"><div class=\"form-group\"><label for=\"summary\">Summary</label><textarea  readonly type=\"text\" class=\"form-control\" name=\"summary\" id=\"summary\" style=\"resize: vertical; max-height: 300px; min-height: 200px;\">" + item.description + "</textarea></div><small style=\"float: right;\">ask for the admin staff for full copy</small></div></div></div>") 
            })
             json.forEach(item=>{ console.log(item.title)})
            console.log(json)

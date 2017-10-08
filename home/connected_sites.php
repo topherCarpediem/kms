@@ -8,7 +8,7 @@ include '../classes/dbHelper.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GAD Mandatez</title> 
+  <title>Connected Sites</title> 
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -58,11 +58,11 @@ include '../classes/dbHelper.php';
             
             <li><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
             <li><a href="about.php">About</a></li>
-            <li  class="active"><a href="mandates.php">GAD Mandates</a></li>
+            <li ><a href="mandates.php">GAD Mandates</a></li>
             <li><a href="linkages.php">Linkages</a></li>
             <li><a href="ppa.php">PPA</a></li>
             <li><a href="resources.php">Resources</a></li>
-            <li><a href="connected_sites.php">Connected Sites</a></li>
+            <li class="active"> <a href="connected_sites.php">Connected Sites</a></li>
             <li><a href="../admin/login.php">Login</a></li>
            
           </ul>
@@ -86,21 +86,19 @@ include '../classes/dbHelper.php';
       <!-- Main content -->
       <section class="content">
        
-        <?php $mandates = DB::query('SELECT * FROM gad WHERE isPublished=true'); ?>
+        <?php $mandates = DB::query('SELECT * FROM connected_sites'); ?>
         <?php foreach ($mandates as $value) { ?>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header">
-              <h4 class="box-title"><?= $value['title'] ?></h4><br>
-              <small><?= $value['author'] ?></small>
+              <img src="<?= 'http://localhost/kms/admin/'.$value['filepath'] ?>" style="max-height:100%; max-width:100%">
             </div>
             <div class="box-body">
                 <div class="form-group">
-                    <label for="summary">Summary</label>
-                    <textarea  readonly type="text" class="form-control" name="summary" id="summary" style="resize: vertical; max-height: 300px; min-height: 200px;"><?= $value['summary'] ?></textarea> 
-                   <!--  <button class="btn btn-primary btn-block" >View</button> -->
+                    
+                    <a href="http://<?= $value['sitelink'] ?>" class="btn btn-primary btn-block">Go to <?= $value['sitename'] ?></a>
                 </div>
-            <small style="float: right;">ask for the admin staff for full copy</small>
+          
             </div>
           </div>
         </div>
