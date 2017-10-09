@@ -43,7 +43,7 @@ include '../classes/dbHelper.php';
 
         <div class="navbar-header">
           <a href="">   <img class="navbar-brand" src="../img/sad.png"></img></a>
-          <a href="index.php" class="navbar-brand"><b>Gender &</b> Development</a>
+          <a href="index.php" class="navbar-brand"><b>GAD</a></b>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -83,7 +83,9 @@ include '../classes/dbHelper.php';
       <!-- Main content -->
       <section class="content">
         <div class="jumbotron">
-            <h3 class="display-3">Knowledge Management System</h3>
+            
+            <h1 class="display-3">Knowledge Management System</h1>
+            <h2 class="display-3">Gender and Development - Batangas State University</h2>
             <p class="lead">To formulate and implement an effective mechanism for planning, policy-making, financing, management, monitoring and assessment of the Extension Service of the University</p>
             <hr class="my-4">
          
@@ -135,7 +137,7 @@ include '../classes/dbHelper.php';
                <div class="small-box bg-red">
                   <div class="inner">
                     <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM ppa')[0]['count']); ?></h4>
-                    <p>PPA</p>
+                    <p>Program, Project and Activities</p>
                   </div>
                   <div class="icon">
                      <i class="fa fa-bandcamp"></i>

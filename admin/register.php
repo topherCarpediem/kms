@@ -21,6 +21,15 @@ if ($password_1 == $password_2) {
   $params = array(':firstname'=>$firstname, ':lastname'=> $lastname, ':username'=>$username, ':email'=>$email, ':password'=>password_hash($password_1, PASSWORD_BCRYPT));
   DB::query('INSERT INTO users VALUES(\'\', :firstname, :lastname, :username, :email, :password)', $params);
         array_push($errors, 'Account created with 0 error. Thank you');
+        //wait
+        //logout the current user
+        if(Login::isLoggedIn()){
+            $token_params = array(':token'=>sha1($_COOKIE['KMSID']));
+            DB::query('DELETE FROM token_manager WHERE token=:token', $token_params);
+        }
+        setcookie('KMSID', '1', time()-3600);
+        setcookie('KMSID_*', '1', time()-3600);
+        header('location: login.php');
   }else{
       array_push($errors ,'Email is used on existing username');
     }

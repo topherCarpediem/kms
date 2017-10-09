@@ -46,7 +46,7 @@ include '../classes/dbHelper.php';
 
         <div class="navbar-header">
           <a href="">   <img class="navbar-brand" src="../img/sad.png"></img></a>
-          <a href="../index.html" class="navbar-brand"><b>Gender &</b> Development</a>
+          <a href="index.php" class="navbar-brand"><b>Gender &</b> Development</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
