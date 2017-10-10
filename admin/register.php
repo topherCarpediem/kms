@@ -18,8 +18,8 @@ if (isset($_POST['reg_user'])) {
 if ($password_1 == $password_2) {
   if(!DB::query('SELECT username FROM users WHERE username=:username', array(':username'=>$username))){
     if(!DB::query('SELECT email FROM users WHERE email=:email', array(':email'=>$email))){
-  $params = array(':firstname'=>$firstname, ':lastname'=> $lastname, ':username'=>$username, ':email'=>$email, ':password'=>password_hash($password_1, PASSWORD_BCRYPT));
-  DB::query('INSERT INTO users VALUES(\'\', :firstname, :lastname, :username, :email, :password)', $params);
+  $params = array(':firstname'=>$firstname, ':lastname'=> $lastname, ':username'=>$username, ':email'=>$email, ':password'=>password_hash($password_1, PASSWORD_BCRYPT), ':image'=>'dist/img/user2-160x160.jpg');
+  DB::query('INSERT INTO users VALUES(\'\', :firstname, :lastname, :username, :email, :password, :image)', $params);
         array_push($errors, 'Account created with 0 error. Thank you');
         //wait
         //logout the current user
@@ -120,11 +120,19 @@ if ($password_1 == $password_2) {
       <div class="row">
         
         <!-- /.col -->
-        <div class="col-xs-4">
+        <div class="col-sm-6">
           <button type="submit" name="reg_user" class="btn btn-primary btn-block btn-flat">Register</button>
+          
         </div>
+
+        <div class="col-sm-6">
+          <button id="admin" class="btn btn-primary btn-block btn-flat">Go to Admin</button>
+          
+        </div>
+    
         <!-- /.col -->
       </div>
+      
     </form>
   </div>
   <!-- /.form-box -->
@@ -137,6 +145,13 @@ if ($password_1 == $password_2) {
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="plugins/iCheck/icheck.min.js"></script>
+
+<script>
+  $("#admin").click(function(e){
+    e.preventDefault()
+    window.location.href = '/kms/admin/'
+  })
+</script>
 
 </body>
 </html>

@@ -93,9 +93,13 @@ $errors = array();
       <div class="row">
         
         <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" name="login_user" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        <div class="col-xs-2">
+          <button type="submit" name="login_user" class="btn btn-primary btn-flat">Sign In</button>
+          
         </div>
+        <div class="col">
+        <button id="home" class="btn btn-primary btn-flat" style="float: right" >Go to home</button>
+      </div>
         <!-- /.col -->
       </div>
     </form>
@@ -111,6 +115,16 @@ $errors = array();
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="plugins/iCheck/icheck.min.js"></script>
+
+<script>
+
+  $("#home").click(function(e){
+    e.preventDefault()
+    window.location.href = '../home/'
+  })
+
+
+</script>
 
 </body>
 </html>

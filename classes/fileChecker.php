@@ -31,8 +31,6 @@ public static function checkImage($document){
 	   		return true;
 	   case 'image/bmp':
 	   		return true;
-	   	case 'image/bmp':
-	   		return true;
 	   default:
 	       	return false;
 	}

@@ -75,41 +75,38 @@ if(isset($_POST['post'])){
         <span class="sr-only">Toggle navigation</span>
       </a>
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+     
+        <?php $res = DB::query('SELECT firstname, lastname, email, image FROM users WHERE id=:id', 
+        array(':id'=>Login::isLoggedIn())); ?>
+        <!-- User Account: style can be found in dropdown.less -->
+        <li class="dropdown user user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="<?= $res[0]['image'] ?>" class="user-image" alt="User Image">
+            <span class="hidden-xs"><?php echo $res[0]['firstname']. ' ' . $res[0]['lastname'];?></span></a>
+          <ul class="dropdown-menu">
+            <!-- User image -->
+            <li class="user-header">
+              <img src="<?= $res[0]['image'] ?>" id="user-profile" class="img-circle" alt="User Image">
+              <p>
+               <?php echo $res[0]['firstname']. ' ' . $res[0]['lastname']; ?>
+                <small><?php echo $res[0]['email']; ?></small>
+              </p>
+            </li>
        
-          
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php $res = DB::query('SELECT firstname, lastname, email FROM users WHERE id=:id', 
-                                      array(':id'=>Login::isLoggedIn()));
-                                      echo $res[0]['firstname']. ' ' . $res[0]['lastname'];
-                                      ?></span></a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                 <?php echo $res[0]['firstname']. ' ' . $res[0]['lastname']; ?>
-                  <small><?php echo $res[0]['email']; ?></small>
-                </p>
-              </li>
-         
-              <li class="user-footer">
-                <form method="post" action="../Login/logout.php">
-                  <div class="pull-right">
-                 <a href="register.php" class="btn btn-primary">Add User</a>
-                    <button type="submit" class="btn btn-default btn-flat" name="logout">Sign out</button>
-                  </div>
-                </form>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+            <li class="user-footer">
+            <form method="post" action="../Login/logout.php">
+                <div class="pull-right">
+                  <a href="register.php" class="btn btn-primary">Add User</a>
+                  <button type="submit" class="btn btn-default btn-flat" name="logout">Sign out</button>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -117,15 +114,7 @@ if(isset($_POST['post'])){
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>  <?php echo $res[0]['firstname']. ' ' . $res[0]['lastname']; ?></p>
-          
-        </div>
-      </div>
+     
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
@@ -335,6 +324,57 @@ if(isset($_POST['post'])){
     </div>
   </div>
 
+  <div class="modal fade" id="editProfile" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">More about <?= $res[0]['firstname'] ?></h4>
+          </div>
+          <div class="modal-body">
+              <center>
+                <img src="<?= $res[0]['image'] ?>" class="img-circle" alt="User Image" style="width: 160px; height: 160px"><br>
+              </center>
+              <center>
+                  <h4><i class="fa fa-user" aria-hidden="true"></i> <?= $res[0]['firstname'] . ' ' . $res[0]['lastname'] ?></h4>
+                  <h4><i class="fa fa-envelope" aria-hidden="true"></i> <?= $res[0]['email'] ?></h4>
+                  <hr>
+              </center>
+              <div id="status">
+              
+              </div>
+              <button data-toggle="collapse" data-target="#change_pass" class="btn btn-primary">Change password</button>
+              <div id="change_pass" class="collapse">
+                  <div class="form-group">     
+                      <label>Old password</label>
+                      <input type="password" id="old_password" class="form-control" placeholder="Enter old password" required>
+                      <label>New password</label>
+                      <input type="password" id="password_1" class="form-control" placeholder="Enter new password" required>
+                      <label>Re-enter new password</label>
+                      <input type="password" class="form-control" id="password_2" placeholder="Re-enter new password" required> <br> 
+                      <button id="submit_pass" class="btn btn-primary">Submit</button>
+                  </div>
+              </div>
+              <hr>
+              <button data-toggle="collapse" data-target="#update_photo" class="btn btn-primary">Update photo</button>
+              <div id="update_photo" class="collapse">
+                <form action="events.php" method="post" enctype="multipart/form-data">
+                  <div class="form-group">     
+                      <label>Select new photo</label>
+                      <input type="file" id="new_photo" name="new_photo" required><br>
+                      <button type="submit" id="upload" name="update_photo" class="btn btn-primary">Update</button>
+                  </div>
+                </form>
+              </div> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfile">Close</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -373,6 +413,7 @@ if(isset($_POST['post'])){
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="bower_components/datatable-select/dataTables.select.min.js"></script>
+<script src="js/userinfo.js"></script>
 <script>
   $(function () {
     $('#example1').DataTable({
