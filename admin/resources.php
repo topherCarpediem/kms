@@ -272,12 +272,8 @@ if (isset($_POST['post'])) {
               <div class="box-body">
                 <div class="form-group">
                   <label for="category">Category</label>
-                  <select class="form-control select2" name="category" id="category" style="width: 100%;">
-                    <option selected="selected">Thesis</option>
-                    <option>Modules</option>
-                    <option>Records</option>
-                    <option>Reports</option>
-                  </select>
+                  <input type="text" class="form-control" name="category" id="category" placeholder="Enter category" required>
+                    
                 </div>
                 <div class="form-group">
                   <label for="title">Title</label>
@@ -447,12 +443,8 @@ if (isset($_POST['post'])) {
          <div class="box-body">
                 <div class="form-group">
                   <label for="category">Category</label>
-                  <select class="form-control select2" name="category" id="category_edit" style="width: 100%;">
-                    <option selected="selected">Thesis</option>
-                    <option>Modules</option>
-                    <option>Records</option>
-                    <option>Reports</option>
-                  </select>
+                  <input type="text" class="form-control" name="category" id="category_edit" placeholder="Enter category" required>
+                  
                 </div>
                 <div class="form-group">
                   <label for="title">Title</label>
@@ -634,7 +626,7 @@ if (isset($_POST['post'])) {
     let http = new XMLHttpRequest()
 
       var data = JSON.stringify({
-        category: $( "#category_edit option:selected" ).text(),
+        category: $( "#category_edit" ).val(),
         title: $("#title_edit").val(),
         description: $("#description_edit").val(),
         author: $("#author_edit").val(),

@@ -205,12 +205,8 @@ if(isset($_POST['post'])){
               <div class="box-body">
                 <div class="form-group">
                   <label for="category">Category</label>
-                  <select class="form-control select2" name="category" id="category" style="width: 100%;">
-                    <option selected="selected">Program</option>
-                    <option>Project</option>
-                    <option>Activity</option>
-                  
-                  </select>
+                  <input type="text" class="form-control" name="category" id="category" placeholder="Enter category" required>
+                   
                 </div>
 
                 <div class="form-group">
@@ -353,12 +349,7 @@ if(isset($_POST['post'])){
         <div class="modal-body">
         <div class="form-group">
                   <label for="category">Category</label>
-                  <select class="form-control select2" name="category" id="category_edit" style="width: 100%;">
-                    <option selected="selected">Program</option>
-                    <option>Project</option>
-                    <option>Activity</option>
-                  
-                  </select>
+                  <input type="text" class="form-control" name="category" id="category_edit" placeholder="Enter category" required>
                 </div>
 
                 <div class="form-group">
@@ -535,7 +526,7 @@ $("#update").click(function(e){
   let http = new XMLHttpRequest()
 
       var data = JSON.stringify({
-        category: $( "#category_edit option:selected" ).text(),
+        category: $( "#category_edit").val(),
         title: $("#title_edit").val(),
         description: $("#description_edit").val(),
         id: e.target.value
