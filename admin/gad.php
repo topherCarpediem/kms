@@ -15,9 +15,11 @@ if (isset($_POST['submit-form'])) {
     if(File::checkformat($_FILES['document']['tmp_name'])){
       $target_dir = "uploads/";
       $target_file = $target_dir . basename(Random::generateRandomString() . '-' . $_FILES["document"]["name"]);
-      $gad_params = array(':filename' => $_FILES['document']['name'], ':filepath'=> $target_file, ':content_type'=> $_FILES['document']['type'], ':title'=> $_POST['title'],':summary'=> $_POST['summary'], ':author'=> $_POST['author'], 'isPublished'=>false);
-      DB::query('INSERT INTO gad VALUES(\'\', :filename, :filepath, :content_type, :title, :summary, :author, :isPublished)', $gad_params);
       move_uploaded_file($_FILES["document"]["tmp_name"], $target_file);
+      $path_parts = pathinfo($target_file); 
+      $extension = strtoupper($path_parts['extension']);
+      $gad_params = array(':filename' => $_FILES['document']['name'], ':filepath'=> $target_file, ':content_type'=> $_FILES['document']['type'], ':title'=> $_POST['title'],':summary'=> $_POST['summary'], ':author'=> $_POST['author'], ':isPublished'=>false, ':file_extension'=>$extension);
+      DB::query('INSERT INTO gad VALUES(\'\', :filename, :filepath, :content_type, :title, :summary, :author, :isPublished, :file_extension)', $gad_params);     
       array_push($success, 'Upload successful');
       }else{
         array_push($errors, 'Invalid document');
@@ -25,7 +27,7 @@ if (isset($_POST['submit-form'])) {
   } catch (Exception $e) {
       array_push($errors, $e.getMessage());
   }
-  
+ 
 }
 
 if (isset($_POST['post'])) {
@@ -247,7 +249,7 @@ if (isset($_POST['download'])) {
     <section class="content">
       <div class="row">
       
-        <div class="col-md-6">
+        <div class="col-md-4">
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -302,7 +304,7 @@ if (isset($_POST['download'])) {
         </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-8">
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">

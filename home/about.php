@@ -1,8 +1,3 @@
-<?php 
-include '../classes/dbHelper.php';
-
-?> 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,8 +48,8 @@ include '../classes/dbHelper.php';
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
             
-            <li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
-            <li><a href="about.php">About</a></li>
+            <li ><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="about.php">About</a></li>
             <li><a href="mandates.php">GAD Mandates</a></li>
             <li><a href="linkages.php">Linkages</a></li>
             <li><a href="ppa.php">PPA</a></li>
@@ -82,115 +77,41 @@ include '../classes/dbHelper.php';
 
       <!-- Main content -->
       <section class="content">
-        <div class="jumbotron">
-            <h3 class="display-3">Knowledge Management System</h3>
-            <p class="lead">To formulate and implement an effective mechanism for planning, policy-making, financing, management, monitoring and assessment of the Extension Service of the University</p>
-            <hr class="my-4">
-         
-          </div>
-        
-        <div class="row">
-
-          <div class="col">
-              <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                  <div class="inner">
-                    <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM gad')[0]['count']); ?></h4>
-                   <p>GAD Mandates</p>
-                  </div>
-                  <div class="icon">
-                      <i class="fa fa-book"></i>
-                  </div>
-                  <a href="mandates.php" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-                </div>
-              </div>
-          </div>
-
-
-          <div class="col">
-              <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                  <div class="inner">
-                    <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM linkages')[0]['count']); ?></h4>
-                    <p>Linkages</p>
-                  </div>
-                  <div class="icon">
-                      <i class="fa fa-link"></i>
-                  </div>
-                  <a href="linkages.php" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-                </div>
-              </div>
-          </div>
-
-
-          <div class="col">
-              <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-               <div class="small-box bg-red">
-                  <div class="inner">
-                    <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM ppa')[0]['count']); ?></h4>
-                    <p>PPA</p>
-                  </div>
-                  <div class="icon">
-                     <i class="fa fa-bandcamp"></i>
-                  </div>
-                  <a href="ppa.php" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-                </div>
-              </div>
-          </div>
-
-           <div class="col">
-              <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-purple">
-                  <div class="inner">
-                    <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM resources')[0]['count']); ?></h4>
-                    <p>Resources</p>
-                  </div>
-                  <div class="icon">
-                     <i class="fa fa-connectdevelop"></i>
-                  </div>
-                  <a href="resources.php" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-                </div>
-              </div>
-          </div>
-
-           <div class="col">
-              <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                 <div class="small-box bg-navy ">
-                  <div class="inner">
-                    <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM connected_sites')[0]['count']); ?></h4>
-                    <p>Connected Sites</p>
-                  </div>
-                  <div class="icon">
-                     <i class="fa fa-external-link"></i>
-                  </div>
-                  <a href="connected_sites.php" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-                </div>
-              </div>
-          </div>
-
-
-        </div>
-     
       
+
+       <div class="col">
+         <div class="box box-primary">
+           <div class="box-header">
+             <center>
+             <h1>VISION, MISSION AND CORE VALUES</h1>
+             <h3> <b style="color:#605ca8">University</b> Vision <h3>
+               <h4>A globally recognized institution of higher learning that develops competent and morally upright citizens who are active participants in nation building and responsive to the challenges of the 21st century.</h4>
+              <hr><h3><b style="color:#605ca8">University</b> Mission</h3>
+                <h4>Batangas State University is committed to the holistic development of productive citizens by providing a conducive learning environment for the generation, dissemination and utilization of knowledge through innovative education, multidisciplinary research collaborations, and community partnerships that would nurture the spirit of nationhood and help fuel national economy for sustainable development.</h4>
+              <hr><h3><b style="color:#605ca8">University</b> Core Values</h3>
+                <h3><b style="color:#605ca8">F</b>aith</h4>              
+                <h4>The University’s initiatives and activities are guided by a strong faith in a Supreme Being. These are anchored on high regard and respect for the beliefs and orientation of each member of the academic community for a productive and meaningful co-existence.</h4>     
+                <h3><b style="color:#605ca8">P</b>atriotism</h4>
+                <h4>This value extends from promoting love of country to taking pride in being a Filipino. The University advocates a strong sense of commitment to national ideals through its active promotion of the Philippine culture and heritage , as well as concern for the environment and the nation’s natural biodiversity, all of which lead to the creation of a pool of professionals who are instrumental for nation building.</h4>
+                <h3><b style="color:#605ca8">H</b>uman Dignity</h4>
+                <h4>This value affirms the uniqueness, inherent worth, and distinction of every member of the community, with high respect to equality, social justice, and human rights. This is seen as the most effective way to prevent or resolve conflicts, and is thus necessary to ensure a harmonious University environment.</h4>
+                <h3><b style="color:#605ca8">I</b>ntegrity</h4>
+                <h4>This pertains to the University’s steadfast adherence to morally-sound principles and ideals in the pursuit of institutional goals and objectives. It covers the values of accountability, honesty, righteousness, incorruptibility, and decency in the governance and implementation of academic, administrative, financial policies.</h4>
+                <h3><b style="color:#605ca8">M</b>utual Respect</h4>
+                <h4>This refers to the recognition and acceptance of individual and professional differences in the exercise of academic freedom and the freedom of expression. It is exhibited by a community that is progressive-minded and receptive to growth and positive change.</h4>
+                <h3><b style="color:#605ca8">E</b>xcellence</h4>
+                <h4>A strong commitment to excellence in the areas of instruction, research and extension services, as well as in the management of financial resources and in the general administration of the University, is the most significant factor in ensuring the successful attainment of the University’s vision. Excellence results to continuous quality improvement in the services offered by the university to its clientele and stakeholders.</h4>
+              
+             </center>
+           </div>
      
+         </div>
+       </div>
+
       
-        <!-- /.box -->
-      </section>
+   
+       <!-- /.box -->
+     </section>
       <!-- /.content -->
     </div>
     <!-- /.container -->

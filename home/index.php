@@ -97,7 +97,7 @@ include '../classes/dbHelper.php';
               <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-green">
-                  <div class="inner">
+                  <div class="inner" style="padding-bottom: 50px">
                     <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM gad')[0]['count']); ?></h4>
                    <p>GAD Mandates</p>
                   </div>
@@ -116,7 +116,7 @@ include '../classes/dbHelper.php';
               <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-yellow">
-                  <div class="inner">
+                  <div class="inner" style="padding-bottom: 50px">
                     <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM linkages')[0]['count']); ?></h4>
                     <p>Linkages</p>
                   </div>
@@ -135,7 +135,7 @@ include '../classes/dbHelper.php';
               <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                <div class="small-box bg-red">
-                  <div class="inner">
+                  <div class="inner" style="padding-bottom: 50px">
                     <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM ppa')[0]['count']); ?></h4>
                     <p>Program, Project and Activities</p>
                   </div>
@@ -153,7 +153,7 @@ include '../classes/dbHelper.php';
               <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-purple">
-                  <div class="inner">
+                  <div class="inner" style="padding-bottom: 50px">
                     <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM resources')[0]['count']); ?></h4>
                     <p>Resources</p>
                   </div>
@@ -171,7 +171,7 @@ include '../classes/dbHelper.php';
               <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                  <div class="small-box bg-navy ">
-                  <div class="inner">
+                  <div class="inner" style="padding-bottom: 50px">
                     <h4><?php echo(DB::query('SELECT COUNT(*) as count FROM connected_sites')[0]['count']); ?></h4>
                     <p>Connected Sites</p>
                   </div>

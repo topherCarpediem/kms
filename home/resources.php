@@ -101,6 +101,11 @@ include '../classes/dbHelper.php';
                     <textarea  readonly type="text" class="form-control" name="summary" id="summary" style="resize: vertical; max-height: 300px; min-height: 200px;"><?= $value['description'] ?></textarea> 
                    <!--  <button class="btn btn-primary btn-block" >View</button> -->
                 </div>
+            <?php if($value['file_extension'] == 'PDF'){ ?>
+            <small class="label label-danger"><?php echo($value['file_extension']); ?></small>
+            <?php }else{ ?>
+            <small class="label label-primary"><?php echo($value['file_extension']); ?></small>
+            <?php } ?>
             <small style="float: right;">ask for the admin staff for full copy</small>
             </div>
           </div>
@@ -162,7 +167,13 @@ function get_mandates_data(keyword){
          if (json.length > 0) {
             $(".content").html('')
            json.forEach(item=>{
-            $(".content").append("<div class=\"col-md-4\"><div class=\"box box-primary\"><div class=\"box-header\"><h4 class=\"box-title\">" + item.title + "</h4><br><small>" + item.author + "</small><br><small>"+ item.category +"</small></div><div class=\"box-body\"><div class=\"form-group\"><label for=\"summary\">Summary</label><textarea  readonly type=\"text\" class=\"form-control\" name=\"summary\" id=\"summary\" style=\"resize: vertical; max-height: 300px; min-height: 200px;\">" + item.description + "</textarea></div><small style=\"float: right;\">ask for the admin staff for full copy</small></div></div></div>") 
+            var template = ""
+            if(item.file_extension == 'PDF'){
+              template =   "<small class=\"label label-danger\">"+ item.file_extension +"</small>"
+            }else{
+              template =   "<small class=\"label label-primary\">"+ item.file_extension +"</small>"
+            }
+            $(".content").append("<div class=\"col-md-4\"><div class=\"box box-primary\"><div class=\"box-header\"><h4 class=\"box-title\">" + item.title + "</h4><br><small>" + item.author + "</small><br><small>"+ item.category +"</small></div><div class=\"box-body\"><div class=\"form-group\"><label for=\"summary\">Summary</label><textarea  readonly type=\"text\" class=\"form-control\" name=\"summary\" id=\"summary\" style=\"resize: vertical; max-height: 300px; min-height: 200px;\">" + item.description + "</textarea></div>"+ template +"<small style=\"float: right;\">ask for the admin staff for full copy</small></div></div></div>") 
            })
             json.forEach(item=>{ console.log(item.title)})
            console.log(json)
