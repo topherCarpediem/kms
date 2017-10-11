@@ -164,6 +164,13 @@ if(!Login::isLoggedIn()){
             <span>Connected Sites</span>
           </a>
         </li>
+
+        <li>
+          <a href="../home/index.php">
+            <i class="  fa fa-home - link"></i>
+            <span>Home Page</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -288,6 +295,8 @@ if(!Login::isLoggedIn()){
             </a>
           </div>
         </div>
+
+
       </div>
       <!-- /.row -->
 
@@ -373,7 +382,7 @@ if(!Login::isLoggedIn()){
                       <label>Select new photo</label>
                       <input type="file" id="new_photo" name="new_photo" required><br>
                       <button type="submit" id="upload" name="update_photo" class="btn btn-primary">Update</button>
-                  </div>
+                  </div>s
                 </form>
               </div> 
           </div>

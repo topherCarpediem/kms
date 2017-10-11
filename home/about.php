@@ -38,7 +38,7 @@
 
         <div class="navbar-header">
           <a href="">   <img class="navbar-brand" src="../img/sad.png"></img></a>
-          <a href="index.php" class="navbar-brand"><b>Gender &</b> Development</a>
+          <a href="index.php" class="navbar-brand"><b>Gender & Development</a></b>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -55,7 +55,7 @@
             <li><a href="ppa.php">PPA</a></li>
             <li><a href="resources.php">Resources</a></li>
             <li><a href="connected_sites.php">Connected Sites</a></li>
-            <li><a href="../admin/login.php">Login</a></li>
+            
            
           </ul>
           <form class="navbar-form navbar-left" role="search">
@@ -83,26 +83,28 @@
          <div class="box box-primary">
            <div class="box-header">
              <center>
-             <h1>VISION, MISSION AND CORE VALUES</h1>
+             <h1><b>University Vision, Mission and Core Values </b></h1>
              <h3> <b style="color:#605ca8">University</b> Vision <h3>
                <h4>A globally recognized institution of higher learning that develops competent and morally upright citizens who are active participants in nation building and responsive to the challenges of the 21st century.</h4>
               <hr><h3><b style="color:#605ca8">University</b> Mission</h3>
                 <h4>Batangas State University is committed to the holistic development of productive citizens by providing a conducive learning environment for the generation, dissemination and utilization of knowledge through innovative education, multidisciplinary research collaborations, and community partnerships that would nurture the spirit of nationhood and help fuel national economy for sustainable development.</h4>
               <hr><h3><b style="color:#605ca8">University</b> Core Values</h3>
-                <h3><b style="color:#605ca8">F</b>aith</h4>              
-                <h4>The University’s initiatives and activities are guided by a strong faith in a Supreme Being. These are anchored on high regard and respect for the beliefs and orientation of each member of the academic community for a productive and meaningful co-existence.</h4>     
-                <h3><b style="color:#605ca8">P</b>atriotism</h4>
-                <h4>This value extends from promoting love of country to taking pride in being a Filipino. The University advocates a strong sense of commitment to national ideals through its active promotion of the Philippine culture and heritage , as well as concern for the environment and the nation’s natural biodiversity, all of which lead to the creation of a pool of professionals who are instrumental for nation building.</h4>
-                <h3><b style="color:#605ca8">H</b>uman Dignity</h4>
-                <h4>This value affirms the uniqueness, inherent worth, and distinction of every member of the community, with high respect to equality, social justice, and human rights. This is seen as the most effective way to prevent or resolve conflicts, and is thus necessary to ensure a harmonious University environment.</h4>
-                <h3><b style="color:#605ca8">I</b>ntegrity</h4>
-                <h4>This pertains to the University’s steadfast adherence to morally-sound principles and ideals in the pursuit of institutional goals and objectives. It covers the values of accountability, honesty, righteousness, incorruptibility, and decency in the governance and implementation of academic, administrative, financial policies.</h4>
-                <h3><b style="color:#605ca8">M</b>utual Respect</h4>
-                <h4>This refers to the recognition and acceptance of individual and professional differences in the exercise of academic freedom and the freedom of expression. It is exhibited by a community that is progressive-minded and receptive to growth and positive change.</h4>
-                <h3><b style="color:#605ca8">E</b>xcellence</h4>
-                <h4>A strong commitment to excellence in the areas of instruction, research and extension services, as well as in the management of financial resources and in the general administration of the University, is the most significant factor in ensuring the successful attainment of the University’s vision. Excellence results to continuous quality improvement in the services offered by the university to its clientele and stakeholders.</h4>
-              
-             </center>
+            </center>
+                <ul>
+                  <li><h3><b style="color:#605ca8">F</b>aith</h3></li>              
+                <h4 style="margin-left: 30px">  The University’s initiatives and activities are guided by a strong faith in a Supreme Being. These are anchored on high regard and respect for the beliefs and orientation of each member of the academic community for a productive and meaningful co-existence.</h4>     
+                <li><h3><b style="color:#605ca8">P</b>atriotism</h3></li>
+                <h4 style="margin-left: 30px">  This value extends from promoting love of country to taking pride in being a Filipino. The University advocates a strong sense of commitment to national ideals through its active promotion of the Philippine culture and heritage , as well as concern for the environment and the nation’s natural biodiversity, all of which lead to the creation of a pool of professionals who are instrumental for nation building.</h4>
+                <li><h3><b style="color:#605ca8">H</b>uman Dignity</h3></li>
+                <h4 style="margin-left: 30px">  This value affirms the uniqueness, inherent worth, and distinction of every member of the community, with high respect to equality, social justice, and human rights. This is seen as the most effective way to prevent or resolve conflicts, and is thus necessary to ensure a harmonious University environment.</h4>
+                <li><h3><b style="color:#605ca8">I</b>ntegrity</h3></li>
+                <h4 style="margin-left: 30px">  This pertains to the University’s steadfast adherence to morally-sound principles and ideals in the pursuit of institutional goals and objectives. It covers the values of accountability, honesty, righteousness, incorruptibility, and decency in the governance and implementation of academic, administrative, financial policies.</h4>
+                <li><h3><b style="color:#605ca8">M</b>utual Respect</h3></li>
+                <h4 style="margin-left: 30px">  This refers to the recognition and acceptance of individual and professional differences in the exercise of academic freedom and the freedom of expression. It is exhibited by a community that is progressive-minded and receptive to growth and positive change.</h4>
+                <li><h3><b style="color:#605ca8">E</b>xcellence</h3></li>
+                <h4 style="margin-left: 30px">  A strong commitment to excellence in the areas of instruction, research and extension services, as well as in the management of financial resources and in the general administration of the University, is the most significant factor in ensuring the successful attainment of the University’s vision. Excellence results to continuous quality improvement in the services offered by the university to its clientele and stakeholders.</h4>
+                <ul>
+          
            </div>
      
          </div>

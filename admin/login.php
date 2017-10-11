@@ -72,7 +72,7 @@ $errors = array();
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <h4><p class="login-box-msg">Sign in to start your session</p></h4>
 
     <form action="login.php" method="post">
         <?php  if (count($errors) > 0) : ?>
@@ -97,7 +97,7 @@ $errors = array();
           <button type="submit" name="login_user" class="btn btn-primary btn-flat">Sign In</button>
           
         </div>
-        <div class="col">
+        <div class="col ">
         <button id="home" class="btn btn-primary btn-flat" style="float: right" >Go to home</button>
       </div>
         <!-- /.col -->

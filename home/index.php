@@ -43,7 +43,7 @@ include '../classes/dbHelper.php';
 
         <div class="navbar-header">
           <a href="">   <img class="navbar-brand" src="../img/sad.png"></img></a>
-          <a href="index.php" class="navbar-brand"><b>GAD</a></b>
+          <a href="index.php" class="navbar-brand"><b>Gender & Development</a></b>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -60,7 +60,6 @@ include '../classes/dbHelper.php';
             <li><a href="ppa.php">PPA</a></li>
             <li><a href="resources.php">Resources</a></li>
             <li><a href="connected_sites.php">Connected Sites</a></li>
-            <li><a href="../admin/login.php">Login</a></li>
            
           </ul>
           <form class="navbar-form navbar-left" role="search">
@@ -76,19 +75,23 @@ include '../classes/dbHelper.php';
   </header>
   <!-- Full Width Column -->
   <div class="content-wrapper">
+
     <div class="container">
       <!-- Content Header (Page header) -->
-  
+   <img src="../img/gad.png" class="img-responsive" width="170" style="margin-top: 2%; postion: relative; padding: 10px; float: left; max-width: 100%; height: auto" />          
+        <img src="../img/bsu_logo.png" class="img-responsive" width="160" style="margin-top: 3%; position: relative; padding: 10px; float: right; max-width: 100%; height: auto" />
 
       <!-- Main content -->
       <section class="content">
         <div class="jumbotron">
+                
+            <center >
+              <h2 class="display-3"><b>Gender and Development - Batangas State University</b></h2>
+            <h2 class="display-3">Knowledge Management System</h2>
             
-            <h1 class="display-3">Knowledge Management System</h1>
-            <h2 class="display-3">Gender and Development - Batangas State University</h2>
             <p class="lead">To formulate and implement an effective mechanism for planning, policy-making, financing, management, monitoring and assessment of the Extension Service of the University</p>
             <hr class="my-4">
-         
+            </center>
           </div>
         
         <div class="row">

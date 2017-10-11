@@ -46,7 +46,7 @@ include '../classes/dbHelper.php';
 
         <div class="navbar-header">
           <a href="">   <img class="navbar-brand" src="../img/sad.png"></img></a>
-          <a href="index.php" class="navbar-brand"><b>Gender &</b> Development</a>
+          <a href="index.php" class="navbar-brand"><b>Gender & Development</a></b>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -63,7 +63,7 @@ include '../classes/dbHelper.php';
             <li><a href="ppa.php">PPA</a></li>
             <li><a href="resources.php">Resources</a></li>
             <li class="active"> <a href="connected_sites.php">Connected Sites</a></li>
-            <li><a href="../admin/login.php">Login</a></li>
+           
            
           </ul>
           <form class="navbar-form navbar-left" role="search">
