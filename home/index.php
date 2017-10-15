@@ -75,8 +75,29 @@ include '../classes/dbHelper.php';
   </header>
   <!-- Full Width Column -->
   <div class="content-wrapper">
-
-    <div class="container">
+    <div class="con" style="float: right; margin-top: 20px;margin-right: 20px; width: 230px">
+    <div class="box box-primary" style="height: 600px">
+      <div class="box-header with-border">
+        <p>Events</p>
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <div style="padding: 5px">
+      <?php $events = DB::query('SELECT * FROM calendar WHERE isPublished=TRUE');?>
+      <?php if(count($events) > 0){ ?>
+        <?php foreach ($events as $item){ ?>
+        <small><b><?= $item['title']; ?></b></small><br>
+        <small><b>WHEN: </b><?= $item['start'] . " to " . $item['end'] ?></small><br>
+        <small><b>TIME: </b><?= $item['timestart'] . " to " . $item['timeend'] ?></small><br>
+        <small><b>WHAT: </b><?= $item['summary'] ?> </small><br><br>
+      <?php }} ?>
+      
+      </div>
+    </div>
+    </div>
+  
+    <div class="container" style="padding-right: 180px">
+      <div class="main">
       <!-- Content Header (Page header) -->
    <img src="../img/gad.png" class="img-responsive" width="170" style="margin-top: 2%; postion: relative; padding: 10px; float: left; max-width: 100%; height: auto" />          
         <img src="../img/bsu_logo.png" class="img-responsive" width="160" style="margin-top: 3%; position: relative; padding: 10px; float: right; max-width: 100%; height: auto" />
@@ -196,7 +217,9 @@ include '../classes/dbHelper.php';
       
         <!-- /.box -->
       </section>
+        
       <!-- /.content -->
+    </div>
     </div>
     <!-- /.container -->
   </div>
@@ -224,5 +247,51 @@ include '../classes/dbHelper.php';
 <script src="../admin/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../admin/dist/js/demo.js"></script>
+
+<script>
+
+$("#navbar-search-input").focus(function(v){
+  $("#navbar-search-input").keypress(function(e){
+      if(e.which == 13){
+        e.preventDefault();
+        get_mandates_data(e.target.value)
+        e.target.value = ''
+      }
+  })
+})
+
+function get_mandates_data(keyword){
+  let http = new XMLHttpRequest()
+      http.onreadystatechange = function(){
+        if (http.status == 200 && http.readyState == 4 ) {
+         console.log(JSON.parse(http.response))
+         var json = JSON.parse(http.response)
+         $('.main').html('')
+         $('.con').html('')
+         json[0].forEach(items=>{
+           console.log(items)
+         })
+
+
+        //  var data = http.response
+        //  var json = JSON.parse(data)
+        //  if (json.length > 0) {
+        //     $(".content").html('')
+        //    json.forEach(item=>{
+        //     $(".content").append("<div class=\"col-md-4\"><div class=\"box box-primary\"><div class=\"box-header\"><h4 class=\"box-title\">" + item.title + "</h4><br><small>" + item.author + "</small></div><div class=\"box-body\"><div class=\"form-group\"><label for=\"summary\">Summary</label><textarea  readonly type=\"text\" class=\"form-control\" name=\"summary\" id=\"summary\" style=\"resize: vertical; max-height: 300px; min-height: 200px;\">" + item.summary + "</textarea></div><small style=\"float: right;\">ask for the admin staff for full copy</small></div></div></div>") 
+        //    })
+        //     json.forEach(item=>{ console.log(item.title)})
+        //    console.log(json)
+        //  }else{
+        //   $(".content").html("<h1 style='font-size: 40px; text-align: center;'>\"Sorry, your keyword does not match anything\"</h1>")
+        //  }
+        }
+      }
+      http.open("GET", "request_for_data.php?keyword=" + keyword, true);
+      http.send();
+}
+
+</script>
+
 </body>
 </html>

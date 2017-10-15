@@ -100,7 +100,12 @@ include '../classes/dbHelper.php';
                     <textarea  readonly type="text" class="form-control" name="summary" id="summary" style="resize: vertical; max-height: 300px; min-height: 200px;"><?= $value['description'] ?></textarea> 
                    <!--  <button class="btn btn-primary btn-block" >View</button> -->
                 </div>
-            <small style="float: right;">ask for the admin staff for full copy</small>
+                <?php if($value['file_extension'] == 'PDF'){ ?>
+                <small class="label label-danger"><?php echo($value['file_extension']); ?></small>
+                <?php }else{ ?>
+                <small class="label label-primary"><?php echo($value['file_extension']); ?></small>
+                <?php } ?>
+                <small style="float: right;"><a href="#" data-toggle="tooltip" title="admin@kms.com" style="color: black">ask for the admin staff for full copy</a></small>
             </div>
           </div>
         </div>
@@ -161,10 +166,18 @@ function get_mandates_data(keyword){
          if (json.length > 0) {
             $(".content").html('')
            json.forEach(item=>{
-            $(".content").append("<div class=\"col-md-4\"><div class=\"box box-primary\"><div class=\"box-header\"><h4 class=\"box-title\">" + item.title + "</h4><br><small>"+ item.category +"</small></div><div class=\"box-body\"><div class=\"form-group\"><label for=\"summary\">Summary</label><textarea  readonly type=\"text\" class=\"form-control\" name=\"summary\" id=\"summary\" style=\"resize: vertical; max-height: 300px; min-height: 200px;\">" + item.description + "</textarea></div><small style=\"float: right;\">ask for the admin staff for full copy</small></div></div></div>") 
+            var template = ""
+            if(item.file_extension == 'PDF'){
+              template =   "<small class=\"label label-danger\">"+ item.file_extension +"</small>"
+            }else{
+              template =   "<small class=\"label label-primary\">"+ item.file_extension +"</small>"
+            }
+            console.log(template)
+            $(".content").append("<div class=\"col-md-4\"><div class=\"box box-primary\"><div class=\"box-header\"><h4 class=\"box-title\">" + item.title + "</h4><br><small>"+ item.category +"</small></div><div class=\"box-body\"><div class=\"form-group\"><label for=\"summary\">Summary</label><textarea  readonly type=\"text\" class=\"form-control\" name=\"summary\" id=\"summary\" style=\"resize: vertical; max-height: 300px; min-height: 200px;\">" + item.description + "</textarea></div>" + template + "<small style=\"float: right;\"><a href=\"#\" data-toggle=\"tooltip\" title=\"admin@kms.com\" style=\"color: black\">ask for the admin staff for full copy</a></small></div></div></div>") 
            })
-            json.forEach(item=>{ console.log(item.title)})
-           console.log(json)
+            //json.forEach(item=>{ console.log(item.title)})
+           //console.log(json)
+           $('[data-toggle="tooltip"]').tooltip();
          }else{
           $(".content").html("<h1 style='font-size: 40px; text-align: center;'>\"Sorry, your keyword does not match anything\"</h1>")
          }
@@ -173,6 +186,11 @@ function get_mandates_data(keyword){
       http.open("GET", "request_for_data.php?keyword=" + keyword, true);
       http.send();
 }
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 
 
 </script>

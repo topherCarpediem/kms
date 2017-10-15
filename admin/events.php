@@ -11,9 +11,13 @@ if(isset($_POST['submit-form'])){
     $calendar_params = array(
       ':start'=> $_POST['start'],
       ':end'=> $_POST['end'],
-      ':title'=> $_POST['title']
+      ':title'=> $_POST['title'],
+      ':timestart'=> $_POST['timestart'],
+      ':timeend'=> $_POST['timeend'],
+      ':summary'=>$_POST['summary'],
+      ':isPublished'=>FALSE
     );
-    DB::query('INSERT INTO calendar VALUES (\'\', :start, :end, :title)', $calendar_params);
+    DB::query('INSERT INTO calendar VALUES (\'\', :start, :end, :title, :timestart, :timeend, :summary, :isPublished)', $calendar_params);
 }
 
 if (isset($_POST['update_photo'])) {
@@ -29,6 +33,17 @@ if (isset($_POST['update_photo'])) {
       }
   } catch (Exception $e) {    
   }
+}
+
+if (isset($_POST['post'])) {
+  if ($_POST['post_id']) {
+     $id = array(':id'=> $_POST['post_id']);
+     $isPublished = DB::query('SELECT isPublished FROM calendar WHERE id=:id', $id)[0]['isPublished'];
+      $linkages_param = array(':isPublished'=> !($isPublished), ':id'=>$_POST['post_id']);
+       DB::query('UPDATE calendar set isPublished=:isPublished WHERE id=:id', $linkages_param);
+  
+  }
+
 }
 ?>
 
@@ -220,11 +235,22 @@ if (isset($_POST['update_photo'])) {
 
                   <label for="category">End</label>
                   <input type="date" class="form-control" name="end" required>
+
+                  <label for="category">Start time</label>
+                  <input class="form-control" type="time" name="timestart" required>
+
+                  <label for="category">End Time</label>
+                  <input class="form-control" type="time" name="timeend" required>
                 </div>
 
                 <div class="form-group">
                   <label for="title">Title</label>
                   <input type="text" class="form-control" name="title" id="title" placeholder="Enter event" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="summary">Short description</label>
+                  <textarea type="text" class="form-control" name="summary" id="summary" placeholder="Enter short description about the event" required style="resize: vertical; max-height: 300px; min-height: 200px;"></textarea> 
                 </div>
 
               </div>
@@ -253,7 +279,8 @@ if (isset($_POST['update_photo'])) {
                   <th>Title</th>
                   <th>Start</th>
                   <th>End</th>
-                  
+                  <th>Time</th>
+                  <th>Status</th>
                 </tr>
                 </thead>
                 <tbody id="table-body">
@@ -275,6 +302,15 @@ if (isset($_POST['update_photo'])) {
                           <?= $item['end']; ?>
                           
                         </td>
+                        <td id="<?= $item['id'] ?>">
+                            <?= $item['timestart'] . " to " . $item['timeend']; ?>
+                            
+                        </td>
+                        <td id="<?= $item['id'] ?>">
+                            <?php if($item['isPublished'] == 0){ ?>
+                            <?php echo 'Unpublished'; } else{ ?>
+                            <?php echo 'Published'; } ?>
+                        </td>
                         
                       </tr>
                     <?php endforeach ?>
@@ -288,20 +324,38 @@ if (isset($_POST['update_photo'])) {
                   <th>Title</th>
                   <th>Start</th>
                   <th>End</th>
+                  <th>Time</th>
+                  <th>Status</th>
               
                 </tr>
                 </tfoot>
               </table>
-
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <form method="post" action="ppa.php">
-                <input type="hidden" id="ppa" name="ppa_id">
-                
-                <button type="button" id="edit" class="btn btn-primary" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
-                <button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-
-              </form>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <form method="post" action="events.php">
+                      <input type="hidden" id="post_id" name="post_id">
+                      <button type="submit" id="post" name="post" class="btn btn-success"><i class="fa fa-paper-plane" aria-hidden="true"></i> Post</button>
+                    </form>
+                  </div> 
+                  <div class="col">
+                    
+                  </div>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <form method="post" action="ppa.php">
+                      <input type="hidden" id="ppa" name="ppa_id">
+                      
+                      <button type="button" id="edit" class="btn btn-primary" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                      <button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+      
+                    </form>
+                  </div>
+              </div>
             </div>
+            </div>
+            
         </div>
           <!-- /.box -->
         </div>
@@ -489,14 +543,14 @@ if (isset($_POST['update_photo'])) {
 
  var tb = document.getElementById('table-body');
  tb.onclick = function(e){
-    // var post = document.getElementById('post')
+    var post = document.getElementById('post')
   
-    // if(e.target.parentNode.id == 0){
-    //  post.innerHTML = "<i class='fa fa-paper-plane' aria-hidden='true'></i> Post"
-    // }else{
-    //   post.innerHTML = "<i class='fa fa-paper-plane' aria-hidden='true'></i> Remove from post"
-    // }
-    // $("#ppa").attr("value", e.target.id)
+    if(e.target.parentNode.id == 0){
+     post.innerHTML = "<i class='fa fa-paper-plane' aria-hidden='true'></i> Post"
+    }else{
+      post.innerHTML = "<i class='fa fa-paper-plane' aria-hidden='true'></i> Remove from post"
+    }
+    $("#post_id").attr("value", e.target.id)
     $("#yes").attr("value", e.target.id)
      $("#edit").attr("value", e.target.id)
     $("#update").attr("value", e.target.id)

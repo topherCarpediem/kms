@@ -1,14 +1,33 @@
 <?php 
 include '../Login/logout.php';
+include '../classes/fileChecker.php';
+include '../classes/stringGenerator.php';
 
 
 if(!Login::isLoggedIn()){
   header('location: ../admin/login.php');
 }
-
+$errors = array();
+$success = array();
 if(isset($_POST['submit-form'])){
-  $ppa_param = array(':title'=> $_POST['title'], ':description'=> $_POST['description'], 'category'=>$_POST['category'], ':isPublished'=> false );
-  DB::query('INSERT INTO ppa VALUES(\'\', :title, :description, :category, :isPublished)', $ppa_param);
+  try{
+    if(File::checkformat($_FILES['document']['tmp_name'])){
+      $target_dir = "uploads/";
+      $target_file = $target_dir . basename(Random::generateRandomString() . '-' . $_FILES["document"]["name"]);
+      move_uploaded_file($_FILES["document"]["tmp_name"], $target_file);
+      $path_parts = pathinfo($target_file); 
+      $extension = strtoupper($path_parts['extension']);
+      $ppa_param = array(':title'=> $_POST['title'], ':description'=> $_POST['description'], 'category'=>$_POST['category'], ':isPublished'=> false,
+      ':filename'=>$_FILES['document']['name'], ':filepath'=>$target_file, ':content_type'=>$_FILES['document']['type'], ':extension'=>$extension );
+      DB::query('INSERT INTO ppa VALUES(\'\', :title, :description, :category, :isPublished, :filename, :filepath, :content_type, :extension)', $ppa_param);
+      array_push($success, 'Upload successful');
+    }else{
+      array_push($errors, 'Invalid document');
+    }
+  }
+  catch (Exception $e) {
+  }
+  
 }
 
 if(isset($_POST['post'])){
@@ -18,6 +37,34 @@ if(isset($_POST['post'])){
     $ppa_param = array(':isPublished'=> !($isPublished), ':id'=>$_POST['ppa_id']);
     DB::query('UPDATE ppa set isPublished=:isPublished WHERE id=:id', $ppa_param);
   }
+}
+
+if (isset($_POST['download'])) {
+  
+    $id = $_POST['ppa_id'];
+    if ($id) {
+      try {
+        $result = DB::query('SELECT filepath,content_type FROM ppa WHERE id=:id', array(':id'=> $id));
+        $file = $result[0]['filepath'];
+        $content_type = $result[0]['content_type'];
+        if (file_exists($file)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: ' . $content_type);
+            header('Content-Disposition: attachment; filename="'.basename($file).'"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            readfile($file);
+            exit;
+        }
+      } catch (Exception $e) {
+          var_dump($e->getMessage());
+      }
+    }else{
+      echo "Please select a file to download";
+    }
+    //$id = file_get_contents('php://input');
 }
 
 
@@ -218,6 +265,13 @@ if(isset($_POST['post'])){
                   <label for="description">Short description</label>
                   <textarea type="text" class="form-control" name="description" id="description" placeholder="Enter short description about the document" required style="resize: vertical; max-height: 300px; min-height: 200px;"></textarea> 
                 </div>
+
+                <div class="form-group">
+                  <label for="document">Upload Document</label>
+                  <input type="file" id="document" name="document" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+
+                  <p class="help-block">Files extension .docx, .doc and .pdf</p>
+                </div>
              
               </div>
               <div class="box-footer">
@@ -243,13 +297,14 @@ if(isset($_POST['post'])){
                 <tr>
                   <th>ID</th>
                   <th>Title</th>
+                  <th>Filename</th>
                   <th>Category</th>
                   <th>Status</th>
                   
                 </tr>
                 </thead>
                 <tbody id="table-body">
-                <?php $table = DB::query("SELECT id, title, category, isPublished FROM ppa");?>
+                <?php $table = DB::query("SELECT id, title, category, isPublished, filename FROM ppa");?>
 
                 <?php if (count($table) > 0) : ?>
                     <?php foreach ($table as $item) : ?>
@@ -259,6 +314,9 @@ if(isset($_POST['post'])){
                         </td>
                         <td id="<?= $item['id'] ?>">
                          <?php print_r($item['title']) ?>
+                        </td>
+                        <td id="<?= $item['id'] ?>">
+                         <?php print_r($item['filename']) ?>
                         </td>
                         <td id="<?= $item['id'] ?>">
                          <?php print_r($item['category']) ?>
@@ -279,6 +337,7 @@ if(isset($_POST['post'])){
                 <tr>
                   <th>ID</th>
                   <th>Title</th>
+                  <th>Filename</th>
                   <th>Category</th>
                   <th>Status</th>
               
@@ -290,6 +349,7 @@ if(isset($_POST['post'])){
               <form method="post" action="ppa.php">
                 <input type="hidden" id="ppa" name="ppa_id">
                 <button type="submit" id="post" name="post" class="btn btn-success"><i class="fa fa-paper-plane" aria-hidden="true"></i> Post</button>
+                <button type="submit" id="download" name="download" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
                 <button type="button" id="edit" class="btn btn-primary" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
                 <button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
 

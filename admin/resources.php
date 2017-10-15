@@ -10,18 +10,26 @@ if(!Login::isLoggedIn()){
  $success = array();
 if (isset($_POST['submit-form'])) {
   try {
+    
+    
+    
     if(File::checkformat($_FILES['document']['tmp_name'])){
-      $target_dir = "uploads/";
-      $target_file = $target_dir . basename(Random::generateRandomString() . '-' . $_FILES["document"]["name"]);
-      move_uploaded_file($_FILES["document"]["tmp_name"], $target_file);
-      $path_parts = pathinfo($target_file); 
-      $extension = strtoupper($path_parts['extension']);
-      $gad_params = array(':filename' => $_FILES['document']['name'], ':filepath'=> $target_file, ':content_type'=> $_FILES['document']['type'], ':title'=> $_POST['title'],':description'=> $_POST['description'], ':author'=> $_POST['author'], ':category'=>$_POST['category'], ':isPublished'=>false, ':file_extension'=>$extension);
-      DB::query('INSERT INTO resources VALUES(\'\', :title, :author, :description, :category, :filename, :filepath, :content_type, :isPublished, :file_extension)', $gad_params);
-      array_push($success, 'Upload successful');
-      }else{
-        array_push($errors, 'Invalid document');
+      if(File::checkImage($_FILES['image']['tmp_name'])){
+        $target_dir = "uploads/images/";
+        $target_file_image = $target_dir . basename(Random::generateRandomString() . '-' . $_FILES["image"]["name"]);
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename(Random::generateRandomString() . '-' . $_FILES["document"]["name"]);
+        move_uploaded_file($_FILES["document"]["tmp_name"], $target_file);
+        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file_image);
+        $path_parts = pathinfo($target_file); 
+        $extension = strtoupper($path_parts['extension']);
+        $gad_params = array(':image_path'=> $target_file_image, ':filename' => $_FILES['document']['name'], ':filepath'=> $target_file, ':content_type'=> $_FILES['document']['type'], ':title'=> $_POST['title'],':description'=> $_POST['description'], ':author'=> $_POST['author'], ':category'=>$_POST['category'], ':isPublished'=>false, ':file_extension'=>$extension);
+        DB::query('INSERT INTO resources VALUES(\'\', :title, :author, :description, :category, :filename, :filepath, :image_path , :content_type, :isPublished, :file_extension)', $gad_params);
+        array_push($success, 'Upload successful');
       }
+    }else{
+        array_push($errors, 'Invalid document');
+    }
   } catch (Exception $e) {
       array_push($errors, $e.getMessage());
   }
@@ -232,7 +240,7 @@ if (isset($_POST['post'])) {
     <section class="content-header">
       <h1>
         Resources
-        <small>Modules, Records, Thesis and Reports</small>
+        <small>Modules, Records, IEC Materials and Reports</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -294,6 +302,14 @@ if (isset($_POST['post'])) {
 
                   <p class="help-block">Files extension .docx, .doc and .pdf</p>
                 </div>
+
+                <div class="form-group">
+                  <label for="image">Upload Photo</label>
+                  <input type="file" id="image" name="image" accept="image/*" required />
+
+                  <p class="help-block">Select image for the cover</p>
+                </div>
+              
               </div>
               <div class="box-footer">
                 <button type="submit" name="submit-form" class="btn btn-primary">Submit</button>
