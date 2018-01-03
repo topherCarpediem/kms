@@ -1,0 +1,9 @@
+Kuya yung Login na folder para siya sa function nung login and signup 
+ng admin
+
+username: admin
+password: qwe123
+wala po kasi sa labas ang signup nasa loob ng admin
+
+admintheme ay galing sa net yung pinapakita ko sayong
+sample ng dashboard.
