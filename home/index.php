@@ -120,7 +120,7 @@ include '../classes/dbHelper.php';
         <div class="row">
 
           <center>
-          <div id="word_cloud" style="margin-top: -70px; background-color: green">
+          <div id="word_cloud" style="margin-top: -70px;">
           </div>
           <center>
 
