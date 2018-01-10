@@ -75,7 +75,7 @@ include '../classes/dbHelper.php';
     </nav>
   </header>
   <!-- Full Width Column -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="background-color: rgb(47, 79, 79)">
     <div class="con" style="float: right; margin-top: 20px;margin-right: 20px; width: 230px">
     <div class="box box-primary" style="height: 600px">
       <div class="box-header with-border">
@@ -104,7 +104,7 @@ include '../classes/dbHelper.php';
       <div class="main">
       <!-- Content Header (Page header) -->
    <img src="../img/gad.png" class="img-responsive" width="170" style="margin-top: 2%; postion: relative; padding: 10px; float: right; max-width: 100%; height: auto" />          
-        <img src="../img/bsu_logo.png" class="img-responsive" width="160" style="margin-top: 2.5%; position: relative; padding: 10px; float: left; max-width: 100%; height: auto" />
+        <img src="../img/bsu_logo.png" class="img-responsive" width="160" style="margin-top: 2.5%; position: relative; padding: 10px; float: left; max-width: 100%; height: auto; margin-left: 10px" />
 
       <!-- Main content -->
       <section class="content">
@@ -120,7 +120,7 @@ include '../classes/dbHelper.php';
         <div class="row">
 
           <center>
-          <div id="word_cloud" style="margin-top: -70px; background-color: green">
+          <div id="word_cloud" style="margin-top: -70px;">
           </div>
           <center>
 

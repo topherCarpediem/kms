@@ -20,6 +20,34 @@ if(isset($_POST['post'])){
   }
 }
 
+if (isset($_POST['download'])) {
+
+  $id = $_POST['linkages_id'];
+  if ($id) {
+    try {
+      $result = DB::query('SELECT filepath,content_type FROM linkages WHERE id=:id', array(':id'=> $id));
+      $file = $result[0]['filepath'];
+      $content_type = $result[0]['content_type'];
+      if (file_exists($file)) {
+          header('Content-Description: File Transfer');
+          header('Content-Type: ' . $content_type);
+          header('Content-Disposition: attachment; filename="'.basename($file).'"');
+          header('Expires: 0');
+          header('Cache-Control: must-revalidate');
+          header('Pragma: public');
+          header('Content-Length: ' . filesize($file));
+          readfile($file);
+          exit;
+      }
+    } catch (Exception $e) {
+        var_dump($e->getMessage());
+    }
+  }else{
+    echo "Please select a file to download";
+  }
+  //$id = file_get_contents('php://input');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -261,6 +289,7 @@ if(isset($_POST['post'])){
               <form method="post" action="linkages.php">
                 <input type="hidden" id="linkages" name="linkages_id">
                 <button type="submit" id="post" name="post" class="btn btn-success"><i class="fa fa-paper-plane" aria-hidden="true"></i> Post</button>
+                <button type="submit" id="download" name="download" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
                 <button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
               </form>
             </div>
